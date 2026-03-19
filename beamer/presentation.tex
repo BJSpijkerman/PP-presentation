@@ -5,14 +5,12 @@
 \usepackage{pgfpages}
 \usepackage{fancyvrb}
 \usepackage{tikz}
+\usetikzlibrary{decorations.markings}
 \usepackage{pgfplots}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{physics}
 
-%\ifnotes
-%\setbeamertemplate{note page}[plain]
-%\setbeameroption{show notes on second screen=right}
-%\fi
 
 \usetheme{auriga}
 \usecolortheme{auriga}
@@ -23,11 +21,14 @@
 \definecolor{gray}{RGB}{146, 146, 146}
 \definecolor{yelow}{RGB}{255, 205, 0}
 
+
 \title{Waveguide propagation}
 
 \author{\underline{Ime Rasenberg} \inst{1} \and \underline{Bram Jan Spijkerman} \inst{1}}
 
 \institute[shortinst]{\inst{1} Utrecht Universiteit}
+
+
 
 \begin{document}
 
@@ -40,12 +41,9 @@
   \end{frame}
 }
 
-\input{slides/bullets}
-\input{slides/split}
-\input{slides/figure}
-\input{slides/centered}
-\input{slides/monospace}
-\input{slides/brackets}
-\input{slides/link}
+\input{slides/ray_waveguide.tex}
+\input{slides/metal_waveguide.tex}
+\input{slides/di_electric_waveguide.tex}
+\input{slides/dispersion.tex}
 
 \end{document}

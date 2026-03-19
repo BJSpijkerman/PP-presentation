@@ -1,0 +1,17 @@
+\begin{frame}{Waveguide dispersion}
+  \begin{minipage}{0.5\textwidth}
+    \begin{align*}
+      \frac{\omega}{c} &= \sqrt{k_x^2+\left(\frac{m\pi}{L}\right)^2}\\\\
+      \phi_{in}(z) &= C_1\phi_1(z) + C_2\phi_2(z)\\\\
+      C_i &= \int_{-\infty}^{\infty}dz\,\phi_{in}^*(z)\phi_i(z)
+    \end{align*}
+  \end{minipage}\hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \resizebox{1\textwidth}{!}{
+        \input{tikz_elements/dispersion_graph}
+        }
+    \end{figure}
+  \end{minipage}
+\end{frame}
