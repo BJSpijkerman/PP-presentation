@@ -1,0 +1,33 @@
+% Slide 1: 3D Point Source to Spatial Distribution
+\begin{frame}{Heat transport}
+	\centering
+	\only<1>{
+		\begin{equation*}
+			\Delta T(\mathbf{r}, t) = \frac{T_0(\mathbf{r}')}{(4 \pi D t)^{3/2}} \exp\left[-\frac{|\mathbf{r}-\mathbf{r}'|^2}{4Dt}\right]
+		\end{equation*}
+	}
+	
+	\only<2>{
+		\begin{equation*}
+			\Delta T(\mathbf{r}, t) = \iiint_{-\infty}^{\infty} \frac{T_0(\mathbf{r}')}{(4 \pi D t)^{3/2}} \exp\left[-\frac{|\mathbf{r}-\mathbf{r}'|^2}{4Dt}\right] d^3\mathbf{r}'
+		\end{equation*}
+	}
+\end{frame}
+
+% Slide 2: Continuous Source Integration
+\begin{frame}{Time-Dependent Continuous Source}
+	\centering
+	\small
+	\only<1>{
+		\begin{equation*}
+			\Delta T(\mathbf{r}, t) = \int_{0}^{t} \iiint_{-\infty}^{\infty} \frac{dT(\mathbf{r}', t')}{dt'} \frac{1}{[4 \pi D (t-t')]^{3/2}} \exp\left[-\frac{|\mathbf{r}-\mathbf{r}'|^2}{4D(t-t')}\right] d^3\mathbf{r}' dt'
+		\end{equation*}
+	}
+	\only<2>{
+	\begin{equation*}
+		\Delta T(\mathbf{r}, t) = \int_{0}^{t} \frac{1}{[4 \pi D (t-t')]^{3/2}} \left(\frac{dT(\mathbf{r}', t')}{dt'} *_x  \exp\left[-\frac{|\mathbf{r}-\mathbf{r}'|^2}{4D(t-t')}\right]\right)  dt'
+	\end{equation*}
+	}
+\end{frame}
+
+

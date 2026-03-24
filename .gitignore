@@ -1,0 +1,17 @@
+/excersise_5/data
+/exercise_8/data
+
+# Ignore all LaTeX auxiliary files
+/beamer/*.aux
+/beamer/*.bbl
+/beamer/*.blg
+/beamer/*.log
+/beamer/*.out
+/beamer/*.toc
+/beamer/*.synctex.gz
+/beamer/*.fls
+/beamer/*.fdb_latexmk
+/beamer/*.pdf
+/beamer/*.vrb
+/beamer/*.snm
+/beamer/*.nav
