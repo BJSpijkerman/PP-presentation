@@ -96,7 +96,7 @@ for tp in t_primes:
 plt.figure(figsize=(10, 6))
 plt.plot(x, delta_T, color='firebrick', lw=2, label=f'Total $\Delta T$ at $t={T_final}$')
 plt.fill_between(x, delta_T, color='orange', alpha=0.2)
-# plt.plot(x, source_spatial * 0.1, 'k--', alpha=0.5, label='Source Location (Scaled)')
+plt.plot(x, source_spatial, 'k--', alpha=0.5, label='Source Location (Scaled)')
 
 plt.title(r'Numerical Integration of $\Delta T(\mathbf{r}, t)$')
 plt.xlabel(r'Position $\mathbf{r}$')
@@ -104,3 +104,25 @@ plt.ylabel(r'Temperature Change $\Delta T$')
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.show()
+
+import pandas as pd
+
+# --- Export Plot 1 (Diffusion Evolution) ---
+# We'll save the initial box and a few specific time steps
+df1 = pd.DataFrame({'x': x, 'initial': f_box})
+for t in [0.05, 5.0, 20.0]: # Choosing 3 representative times
+    kernel = gaussian_kernel(x, t, D)
+    conv = convolve(f_box, kernel, mode='same') * dx
+    df1[f't_{t}'] = conv
+
+# Downsample to ~200 points so LaTeX doesn't crash
+df1_small = df1.iloc[::10, :] 
+df1_small.to_csv('diffusion_evolution.csv', index=False)
+
+# --- Export Plot 2 (Numerical Integration) ---
+# delta_T is the result from your second loop
+df2 = pd.DataFrame({'x': x, 'delta_T': delta_T})
+df2_small = df2.iloc[::10, :]
+df2_small.to_csv('total_delta_t.csv', index=False)
+
+print("CSV files saved: diffusion_evolution.csv, total_delta_t.csv")
