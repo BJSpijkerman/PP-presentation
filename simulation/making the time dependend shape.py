@@ -157,10 +157,12 @@ def L(dT):
 l,dl = L(delta_T)
 
 plt.plot(x,l+dl)
-plt.ylim([0.0, max(l+dl)*1.1])
+# plt.ylim([0.0, max(l+dl)*1.1])
 plt.show()
 
+changes = np.diff(dl)/dx
 
+T = 1 - sum ( np.abs(changes))/l * dx
 
 
 

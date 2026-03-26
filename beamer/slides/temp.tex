@@ -57,7 +57,8 @@
 	\begin{tikzpicture}
 		\begin{axis}[
 			waveguide_style, 
-			ylabel={Total $\Delta T$},
+			ylabel={$\Delta T$},
+			xlabel={$x$},
 			ymin=0, % Ensures the plot starts at the baseline
 			ymax=1.2 % Adjust based on your data peak
 			]
@@ -69,13 +70,12 @@
 			(axis cs:\pgfkeysvalueof{/pgfplots/xmin},0) -- 
 			(axis cs:\pgfkeysvalueof{/pgfplots/xmax},0);
 			
-			\addplot[orange!20] fill between[of=A and B];
+			%\addplot[orange!20] fill between[of=A and B];
 			
 			% 2. The Dashed Line (Source Location)
 			% This pulls the 'initial' or 'source' column from your CSV
 			\addplot[black, dashed, thin] 
 			table [x=x, y=initial, col sep=comma] {diffusion_evolution.csv};
-			\addlegendentry{Source Area}
 			
 		\end{axis}
 	\end{tikzpicture}
@@ -98,10 +98,12 @@
 
 
 \begin{frame}{Reflection}
-	\begin{equation}
-		T = \int_{0}^{d} dx T(L(T(x)))
-	\end{equation}
-	
+	\begin{equation*}
+		\begin{split}
+			T &= 1- \frac{\int_{\mathbf{D}} \left|\frac{dL}{dx}\right| dx}{L}\\
+			&\approx 1 - 4\cdot 10^{-7}
+		\end{split}
+	\end{equation*}	
 \end{frame}
 
 
