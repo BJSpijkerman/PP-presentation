@@ -13,13 +13,13 @@ def gaussian_kernel(x, t, D=1.0):
     sigma = np.sqrt(2 * D * t)
     return (1.0 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-x**2 / (2 * sigma**2))
 
-L=100
-# 1. Setup spatial grid
-x = np.linspace(-L, L, 2000)
+L = 100
+N_x = 1000  # Set this once
+x = np.linspace(-L, L, N_x)
 dx = x[1] - x[0]
-box_width = 100
-D = 1.0  # Diffusion coefficient
-times = [0.05, 1.0, 5.0, 20.0]  # From very early to 'late' t
+box_width = 75
+D = 3.0  # Diffusion coefficient
+times = [5, 20, 50, 200, 1000]  # From very early to 'late' t
 
 # 2. Create the initial source (box function)
 f_box = box_function(x, width=box_width)
@@ -105,24 +105,68 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 plt.show()
 
+#%%
 import pandas as pd
 
-# --- Export Plot 1 (Diffusion Evolution) ---
-# We'll save the initial box and a few specific time steps
-df1 = pd.DataFrame({'x': x, 'initial': f_box})
-for t in [0.05, 5.0, 20.0]: # Choosing 3 representative times
-    kernel = gaussian_kernel(x, t, D)
-    conv = convolve(f_box, kernel, mode='same') * dx
-    df1[f't_{t}'] = conv
+# 1. Recalculate the initial source on the CURRENT x grid to avoid length mismatches
+f_box_current = box_function(x, width=box_width)
 
-# Downsample to ~200 points so LaTeX doesn't crash
-df1_small = df1.iloc[::10, :] 
-df1_small.to_csv('diffusion_evolution.csv', index=False)
+# 2. Prepare Data for Plot 1 (Diffusion Snapshots)
+# We calculate these here to ensure they match the current grid length
+t_05 = convolve(f_box_current, gaussian_kernel(x, 0.05, D), mode='same') * dx
+t_5  = convolve(f_box_current, gaussian_kernel(x, 5.0, D), mode='same') * dx
+t_20 = convolve(f_box_current, gaussian_kernel(x, 20.0, D), mode='same') * dx
 
-# --- Export Plot 2 (Numerical Integration) ---
-# delta_T is the result from your second loop
-df2 = pd.DataFrame({'x': x, 'delta_T': delta_T})
-df2_small = df2.iloc[::10, :]
-df2_small.to_csv('total_delta_t.csv', index=False)
+df1 = pd.DataFrame({
+    'x': x,
+    'initial': f_box_current,
+    't_0.05': t_05,
+    't_5.0': t_5,
+    't_20.0': t_20
+})
 
-print("CSV files saved: diffusion_evolution.csv, total_delta_t.csv")
+# 3. Prepare Data for Plot 2 (Integrated Total)
+df2 = pd.DataFrame({
+    'x': x, 
+    'delta_T': delta_T,
+    'initial': f_box_current  # We include 'initial' here so the dashed line works in LaTeX
+})
+
+# 4. Downsample and Save
+# Using .copy() avoids a common Pandas warning; iloc[::10] keeps the file small for LaTeX
+df1.iloc[::10, :].copy().to_csv('diffusion_evolution.csv', index=False)
+df2.iloc[::10, :].copy().to_csv('total_delta_t.csv', index=False)
+
+print(f"Success! CSVs saved with {len(df1)//10} points each.")
+
+#%%
+
+L_0 = 8.5E-6
+alpha = 0.55E-6
+dndT = 1.1E-5
+n_0 = 1.4682
+
+def L(dT):
+    dl_1 = alpha*dT
+    dl_2 = dndT * dT
+    
+    dl = L_0*(n_0 * dl_1 + dl_1 + dl_1 *dl_2)
+    l = n_0 *L_0
+    return l,dl
+
+l,dl = L(delta_T)
+
+plt.plot(x,l+dl)
+plt.ylim([0.0, max(l+dl)*1.1])
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
