@@ -1,3 +1,55 @@
+\begin{frame}{Propagation through fiber distortions}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=\linewidth,
+			height=0.8\textheight,
+			xlabel={$x$},
+			ylabel={$z$},
+			axis lines=none,
+			ymin=-3.8,
+			ymax=0.8
+			]
+			
+			% --- Positive curve ---
+			\addplot[
+			color=firebrick,
+			thick
+			]
+			table [x=x, y=delta_T, col sep=comma] {total_delta_t.csv};
+			
+			% --- Negative shifted curve ---
+			\addplot[
+			color=firebrick,
+			thick
+			]
+			table [
+			x=x, 
+			y expr={- \thisrow{delta_T} - 3},
+			col sep=comma
+			] {total_delta_t.csv};
+			
+		\end{axis}
+		
+		% --- Small orientation axis (bottom-right) ---
+		\begin{axis}[
+			at={(0.92\linewidth,0.05\textheight)},
+			anchor=south east,
+			width=2.5cm,
+			height=2.5cm,
+			xmin=0, xmax=1,
+			ymin=0, ymax=1,
+			axis lines=middle,
+			ticks=none,
+			xlabel={$x$},
+			ylabel={$z$},
+			every axis x label/.style={at={(axis description cs:1,0)},anchor=west},
+			every axis y label/.style={at={(axis description cs:0,1)},anchor=south}
+			]
+		\end{axis}
+	\end{tikzpicture}
+\end{frame}
+
 \begin{frame}{Mode overlap}
 	\centering
 	\only<1>{
