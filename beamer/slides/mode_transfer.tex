@@ -51,9 +51,7 @@
 \end{frame}
 
 \begin{frame}{Mode overlap}
-	\centering
-	\only<1>{
-		
+	\centering		
 \begin{tikzpicture}[scale=1.2] % Scaled down slightly further
 	
 	% Parameters
@@ -119,15 +117,15 @@
 			{\left[\int_{-L/2}^{L/2}dz \cos^2(\frac{2\pi}{L}z)\right]
 			\left[\int_{-(L+\delta L)/2}^{(L+\delta L)/2}dz\cos^2(\frac{2\pi}{L+\delta L}z) \right]}
 		\end{equation*}
-	}
-	
-	\only<2>{
-		\begin{equation*}
-			\begin{split}
-				T(L,x_i) &=\frac{L^2 + L\delta L}{(L+\delta L)^2}\ \text{sinc}^2\left(\frac{\pi \delta L}{L}\right)\\
-				&\approx 1 - \frac{|\delta L|}{L}
-			\end{split}
-		\end{equation*}
-	}
 
+
+\end{frame}
+
+\begin{frame}{Mode Overlap}
+	\begin{equation*}
+		\begin{split}
+			T(L,x_i) &=\frac{L^2 + L\delta L}{(L+\delta L)^2}\ \text{sinc}^2\left(\frac{\pi \delta L}{L}\right)\\
+			&\approx 1 - \frac{|\delta L|}{L}
+		\end{split}
+	\end{equation*}
 \end{frame}

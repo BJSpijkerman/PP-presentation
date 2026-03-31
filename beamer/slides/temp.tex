@@ -100,9 +100,9 @@
 \begin{frame}{Reflection}
 	\begin{equation*}
 		\begin{split}
-			T&= \prod_{x_i=0}^{x_i=d} T(x_i)\\
-			&= \prod_{x_i=0}^{x_i=d} \left(1-\frac{|L(x_{i+1}) - L(x_{i})|}{L(x_i)}\right)\\
-			&\approx 1 - \sum_{x_i=0}^{x_i=d}\frac{|L(x_{i+1}) - L(x_{i})|}{L(x_i)}\\
+			T&= \prod_{x_i=a}^{x_i=b} T(x_i)\\
+			&\approx \prod_{x_i=a}^{x_i=b} \left(1-\frac{|L(x_{i+1}) - L(x_{i})|}{L(x_i)}\right)\\
+			&\approx 1 - \sum_{x_i=a}^{x_i=b}\frac{|L(x_{i+1}) - L(x_{i})|}{L(x_i)}\\
 			&\approx 1 - 4\cdot 10^{-7}
 		\end{split}
 	\end{equation*}	
