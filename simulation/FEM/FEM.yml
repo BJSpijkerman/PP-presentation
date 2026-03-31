@@ -1,0 +1,21 @@
+name: FEM
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+
+  # Core FEM stack
+  - fenics-dolfinx=0.10.0
+
+  # Complex-enabled PETSc toolchain (Dolfinx 0.10 already compatible)
+  - petsc=*=complex*
+  - slepc=*=complex*
+
+  # Mesh + numerics
+  - gmsh
+  - numpy
+  - mpi4py
+
+  # Optional but useful
+  - scipy
+  - matplotlib
